@@ -265,6 +265,7 @@ html, body {
 
 /* Model Selector - Smaller */
 .model-selector {
+  display: none;
   position: absolute;
   top: clamp(8px, 1.5vw, 15px);
   right: clamp(8px, 1.5vw, 15px);
