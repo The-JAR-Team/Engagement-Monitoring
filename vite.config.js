@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import fs from 'fs';
 
 export default defineConfig({
-  base: '/', 
+  base: 'Engagement-Monitoring/', 
   plugins: [
     react(),
     {

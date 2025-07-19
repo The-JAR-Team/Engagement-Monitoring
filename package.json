@@ -3,16 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://The-JAR-Team.github.io/Engagement-Monitoring",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@mediapipe/camera_utils": "^0.3.1675466862",
     "@mediapipe/face_mesh": "^0.4.1633559619",
     "axios": "^1.10.0",
+    "gh-pages": "^6.3.0",
     "onnxruntime-web": "^1.22.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
