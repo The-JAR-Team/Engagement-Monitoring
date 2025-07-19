@@ -25,8 +25,8 @@ export const loadOnnxModelFromUrl = async (url) => {
   }
 };
 
-// Function to load the ONNX model and return its ArrayBuffer
-export const getOnnxModelBuffer = async (modelFilename = 'engagement_multitask_v4.onnx') => {
+// Function to load the ONNX model from a URL or create a dataURL from a base64 string
+export const getOnnxModelUri = async (modelFilename = 'engagement_multitask_v4.onnx') => {
   // Try loading from URL first with various paths that might work
   const baseUrl = window.location.origin;
   const basePath = window.location.pathname.endsWith('/') 
@@ -44,17 +44,21 @@ export const getOnnxModelBuffer = async (modelFilename = 'engagement_multitask_v
   ];
   
   // Log all URLs we're going to try
-  console.log(`Attempting to load ONNX model buffer '${modelFilename}' from the following URLs:`, urls);
+  console.log(`Attempting to load ONNX model '${modelFilename}' from the following URLs:`, urls);
   
   for (const url of urls) {
     const modelBuffer = await loadOnnxModelFromUrl(url);
     if (modelBuffer) {
-      console.log(`Successfully loaded ONNX model buffer from ${url}`);
-      return modelBuffer;
+      // Create a Blob from the buffer
+      const blob = new Blob([modelBuffer], { type: 'application/octet-stream' });
+      // Create a URL for the blob
+      const modelUrl = URL.createObjectURL(blob);
+      console.log(`Created ONNX model blob URL from ${url}`);
+      return modelUrl;
     }
   }
   
   // If none of the URLs work, return null
-  console.error('Failed to load ONNX model buffer from any URL');
+  console.error('Failed to load ONNX model from any URL');
   return null;
 };
